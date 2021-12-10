@@ -1,0 +1,95 @@
+
+News
+PSENet is included in MMOCR.
+We have upgraded PSENet from python2 to python3. You can find the old version here.
+We have implemented PSENet using Paddle. Visit it here.
+You can find code of PAN here.
+Another group also implemented PSENet using Paddle. You can visit it here. You can also have a try online with all the environment ready here.
+Introduction
+Official Pytorch implementations of PSENet [1].
+
+[1] W. Wang, E. Xie, X. Li, W. Hou, T. Lu, G. Yu, and S. Shao. Shape robust text detection with progressive scale expansion network. In Proc. IEEE Conf. Comp. Vis. Patt. Recogn., pages 9336–9345, 2019.
+
+Recommended environment
+Python 3.6+
+Pytorch 1.1.0
+torchvision 0.3
+mmcv 0.2.12
+editdistance
+Polygon3
+pyclipper
+opencv-python 3.4.2.17
+Cython
+Install
+pip install -r requirement.txt
+./compile.sh
+Training
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py ${CONFIG_FILE}
+For example:
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py config/psenet/psenet_r50_ic15_736.py
+Test
+python test.py ${CONFIG_FILE} ${CHECKPOINT_FILE}
+For example:
+
+python test.py config/psenet/psenet_r50_ic15_736.py checkpoints/psenet_r50_ic15_736/checkpoint.pth.tar
+Speed
+python test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} --report_speed
+For example:
+
+python test.py config/psenet/psenet_r50_ic15_736.py checkpoints/psenet_r50_ic15_736/checkpoint.pth.tar --report_speed
+Evaluation
+Introduction
+The evaluation scripts of ICDAR 2015 (IC15), Total-Text (TT) and CTW1500 (CTW) datasets.
+
+ICDAR 2015
+Text detection
+
+./eval_ic15.sh
+Total-Text
+Text detection
+
+./eval_tt.sh
+CTW1500
+Text detection
+
+./eval_ctw.sh
+Benchmark
+Results
+ICDAR 2015
+
+Method	Backbone	Fine-tuning	Scale	Config	Precision (%)	Recall (%)	F-measure (%)	Model
+PSENet	ResNet50	N	Shorter Side: 736	psenet_r50_ic15_736.py	83.6	74.0	78.5	Google Drive
+PSENet	ResNet50	N	Shorter Side: 1024	psenet_r50_ic15_1024.py	84.4	76.3	80.2	Google Drive
+PSENet (paper)	ResNet50	N	Longer Side: 2240	-	81.5	79.7	80.6	-
+PSENet	ResNet50	Y	Shorter Side: 736	psenet_r50_ic15_736_finetune.py	85.3	76.8	80.9	Google Drive
+PSENet	ResNet50	Y	Shorter Side: 1024	psenet_r50_ic15_1024_finetune.py	86.2	79.4	82.7	Google Drive
+PSENet (paper)	ResNet50	Y	Longer Side: 2240	-	86.9	84.5	85.7	-
+CTW1500
+
+Method	Backbone	Fine-tuning	Config	Precision (%)	Recall (%)	F-measure (%)	Model
+PSENet	ResNet50	N	psenet_r50_ctw.py	82.6	76.4	79.4	Google Drive
+PSENet (paper)	ResNet50	N	-	80.6	75.6	78	-
+PSENet	ResNet50	Y	psenet_r50_ctw_finetune.py	84.5	79.2	81.8	Google Drive
+PSENet (paper)	ResNet50	Y	-	84.8	79.7	82.2	-
+Total-Text
+
+Method	Backbone	Fine-tuning	Config	Precision (%)	Recall (%)	F-measure (%)	Model
+PSENet	ResNet50	N	psenet_r50_tt.py	87.3	77.9	82.3	Google Drive
+PSENet (paper)	ResNet50	N	-	81.8	75.1	78.3	-
+PSENet	ResNet50	Y	psenet_r50_tt_finetune.py	89.3	79.6	84.2	Google Drive
+PSENet (paper)	ResNet50	Y	-	84.0	78.0	80.9	-
+Citation
+@inproceedings{wang2019shape,
+  title={Shape robust text detection with progressive scale expansion network},
+  author={Wang, Wenhai and Xie, Enze and Li, Xiang and Hou, Wenbo and Lu, Tong and Yu, Gang and Shao, Shuai},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  pages={9336--9345},
+  year={2019}
+}
+License
+This project is developed and maintained by IMAGINE Lab@National Key Laboratory for Novel Software Technology, Nanjing University.
+
+IMAGINE Lab
+
+This project is released under the Apache 2.0 license.
